@@ -82,29 +82,29 @@ public class SessionServiceImplementation implements SessionService {
 	}
 
 	@Override
-	public boolean addCandidat(Session session, Etudiant etudiant) {
-        return sessionDao.addCandidat(session, etudiant);
+	public boolean addCandidature(Session session, Etudiant etudiant) {
+        return sessionDao.addCandidature(session, etudiant);
 	}
 
 	@Override
-	public boolean removeCandidat(Session session, Etudiant etudiant) {
-        return sessionDao.removeCandidat(session, etudiant);
+	public boolean removeCandidature(Session session, Etudiant etudiant) {
+        return sessionDao.removeCandidature(session, etudiant);
 	}
 
 	@Override
-	public boolean addEtudiant(Session session, Etudiant etudiant) {
+	public boolean acceptCandidature(Session session, Etudiant etudiant) {
 		Candidature candidature = sessionDao.getCandidature(session, etudiant);
 		if(candidature != null)
-			return sessionDao.addEtudiant(candidature);
+			return sessionDao.acceptCandidature(candidature);
 		else
 			return false;
 	}
 
 	@Override
-	public boolean removeEtudiant(Session session, Etudiant etudiant) {
+	public boolean denyCandidature(Session session, Etudiant etudiant) {
 		Candidature candidature = sessionDao.getCandidature(session, etudiant);
 		if(candidature != null)
-			return sessionDao.removeEtudiant(candidature);
+			return sessionDao.denyCandidature(candidature);
 		else
 			return false;
 	}

@@ -13,9 +13,9 @@ public interface SessionDao {
 	List<Session> getAll();
 	List<Session> getByFormation(Formation formation);
 	Session getByCours(Cours cours);
-	boolean addCandidat(Session session, Etudiant etudiant);
-	boolean removeCandidat(Session session, Etudiant etudiant);
 	Candidature getCandidature(Session session, Etudiant etudiant);
-	boolean addEtudiant(Candidature candidature);
-	boolean removeEtudiant(Candidature candidature);
+	boolean addCandidature(Session session, Etudiant etudiant);
+	boolean removeCandidature(Session session, Etudiant etudiant);
+	boolean acceptCandidature(Candidature candidature);
+	boolean denyCandidature(Candidature candidature);
 }

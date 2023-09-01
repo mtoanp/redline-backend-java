@@ -8,17 +8,17 @@ import app.model.entity.Formation;
 import app.model.entity.Session;
 
 public interface SessionService {
-	public int add(Session session);
-	public Integer addGetId(Session session);
-	public boolean update(Session session);
-	public boolean delete(Session session);
-	public Session get(int id);
-	public List<Session> getAll();
-	public List<Session> getByFormation(Formation formation);
-	public Session getWithDetails(int id);
-	public Session getByCours(Cours cours);
-	public boolean addEtudiant(Session session, Etudiant etudiant);
-	public boolean removeEtudiant(Session session, Etudiant etudiant);
-	public boolean addCandidat(Session session, Etudiant etudiant);
-	public boolean removeCandidat(Session session, Etudiant etudiant);
+	int add(Session session);
+	Integer addGetId(Session session);
+	boolean update(Session session);
+	boolean delete(Session session);
+	Session get(int id);
+	List<Session> getAll();
+	List<Session> getByFormation(Formation formation);
+	Session getWithDetails(int id);
+	Session getByCours(Cours cours);
+	boolean addCandidature(Session session, Etudiant etudiant);
+	boolean removeCandidature(Session session, Etudiant etudiant);
+	boolean acceptCandidature(Session session, Etudiant etudiant);
+	boolean denyCandidature(Session session, Etudiant etudiant);
 }
