@@ -2,20 +2,20 @@ package app.model.dao;
 
 import java.util.List;
 
-import app.model.entity.Cours;
-import app.model.entity.Etudiant;
-import app.model.entity.Formation;
-import app.model.entity.Session;
+import app.model.entity.*;
 
 public interface SessionDao {
-	public int add(Session session);
-	public Integer addGetId(Session session);
-	public boolean update(Session session);
-	public boolean delete(Session session);
-	public Session get(int id);
-	public List<Session> getAll();
-	public List<Session> getByFormation(Formation formation);
-	public Session getByCours(Cours cours);
-	public boolean addEtudiant(Session session, Etudiant etudiant);
-	public boolean removeEtudiant(Session session, Etudiant etudiant);
+	int add(Session session);
+	Integer addGetId(Session session);
+	boolean update(Session session);
+	boolean delete(Session session);
+	Session get(int id);
+	List<Session> getAll();
+	List<Session> getByFormation(Formation formation);
+	Session getByCours(Cours cours);
+	boolean addCandidat(Session session, Etudiant etudiant);
+	boolean removeCandidat(Session session, Etudiant etudiant);
+	Candidature getCandidature(Session session, Etudiant etudiant);
+	boolean addEtudiant(Candidature candidature);
+	boolean removeEtudiant(Candidature candidature);
 }

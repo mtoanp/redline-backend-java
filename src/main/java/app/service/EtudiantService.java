@@ -13,5 +13,5 @@ public interface EtudiantService {
 	public boolean update(Etudiant etudiant);
 	public Integer addGetId(Etudiant etudiant);
 	public List<Etudiant> getBySession(Session session);
-	public List<Etudiant> getBySessionNoValide(Session session);
+	public List<Etudiant> getCandidatsBySession(Session session);
 }

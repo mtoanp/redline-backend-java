@@ -19,4 +19,6 @@ public interface SessionService {
 	public Session getByCours(Cours cours);
 	public boolean addEtudiant(Session session, Etudiant etudiant);
 	public boolean removeEtudiant(Session session, Etudiant etudiant);
+	public boolean addCandidat(Session session, Etudiant etudiant);
+	public boolean removeCandidat(Session session, Etudiant etudiant);
 }

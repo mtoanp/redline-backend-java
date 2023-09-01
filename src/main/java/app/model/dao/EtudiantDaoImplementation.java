@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.model.entity.Cours;
 import app.model.entity.Etudiant;
 import app.model.entity.Session;
 
@@ -146,7 +145,7 @@ public class EtudiantDaoImplementation implements EtudiantDao {
 							+ " LEFT JOIN session_etudiant es"
 							+ " ON e.id = es.id_etudiant"
 							+ " WHERE es.id_session = " + session.getId() 
-							+ "AND es.valide IS true";
+							+ " AND es.valide IS true";
 			
 			ResultSet resultSet = statement.executeQuery(query);
 			
@@ -164,16 +163,15 @@ public class EtudiantDaoImplementation implements EtudiantDao {
 		return etudiants;
 	}
 	
-	public List<Etudiant> getBySessionNoValide(Session session) {
+	public List<Etudiant> getCandidatsBySession(Session session) {
 		List<Etudiant> etudiants = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-//			String query = "SELECT * FROM etudiant WHERE id_session = " + id;
 			String query = "SELECT * FROM etudiant e "
 							+ " LEFT JOIN session_etudiant es"
 							+ " ON e.id = es.id_etudiant"
 							+ " WHERE es.id_session = " + session.getId() 
-							+ "AND es.valide IS false";
+							+ " AND es.valide IS false";
 			
 			ResultSet resultSet = statement.executeQuery(query);
 			

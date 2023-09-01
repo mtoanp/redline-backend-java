@@ -8,10 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.model.entity.Cours;
-import app.model.entity.Etudiant;
-import app.model.entity.Formation;
-import app.model.entity.Session;
+import app.model.entity.*;
 
 public class SessionDaoImplementation implements SessionDao {
 	
@@ -42,9 +39,7 @@ public class SessionDaoImplementation implements SessionDao {
 	
 	
 	public Integer addGetId(Session session) {
-		
 		String query = "INSERT INTO session(date_de_debut, date_de_fin, capacite, id_formation) VALUE(?, ?, ?, ?)";
-		
 		try {
 			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, session.getDateDeDebut());
@@ -179,7 +174,7 @@ public class SessionDaoImplementation implements SessionDao {
 	
 	
 	@Override
-	public boolean addEtudiant(Session session, Etudiant etudiant) {
+	public boolean addCandidat(Session session, Etudiant etudiant) {
 		String query = "INSERT INTO session_etudiant(id_session, id_etudiant) VALUE(?, ?)";
 		PreparedStatement statement;
 		try {
@@ -199,8 +194,8 @@ public class SessionDaoImplementation implements SessionDao {
 	}
 	
 
-	@Override	
-	public boolean removeEtudiant(Session session, Etudiant etudiant) {
+	@Override
+	public boolean removeCandidat(Session session, Etudiant etudiant) {
 		String query = "DELETE FROM session_etudiant WHERE id_session = ? and id_etudiant = ?";
 		PreparedStatement statement;
 		try {
@@ -218,8 +213,61 @@ public class SessionDaoImplementation implements SessionDao {
 	
 		return false;
 	}
-	
-	
+
+
+	@Override
+	public Candidature getCandidature(Session session, Etudiant etudiant) {
+		String query = "SELECT * FROM session_etudiant" +
+				" WHERE id_session = ? AND id_etudiant = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, session.getId());
+			statement.setInt(2, etudiant.getId());
+			ResultSet resultSet = statement.executeQuery();
+
+			if(resultSet.next()) {
+				Candidature candidature = new Candidature(
+						resultSet.getInt("id_session"),
+						resultSet.getInt("id_etudiant")
+				);
+				return candidature;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean addEtudiant(Candidature candidature) {
+		String query = "UPDATE session_etudiant SET valide = ? WHERE id_session = ? AND id_etudiant = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setBoolean(1, true);
+			statement.setInt(2, candidature.getIdSession());
+			statement.setInt(3, candidature.getIdEtudiant());
+			if(statement.executeUpdate() > 0) return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeEtudiant(Candidature candidature) {
+		String query = "UPDATE session_etudiant SET valide = ? WHERE id_session = ? AND id_etudiant = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setBoolean(1, false);
+			statement.setInt(2, candidature.getIdSession());
+			statement.setInt(3, candidature.getIdEtudiant());
+			if(statement.executeUpdate() > 0) return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	@Override
 	public Session getByCours(Cours cours) {
 		String query = "SELECT * FROM session WHERE id = " + cours.getIdSession();

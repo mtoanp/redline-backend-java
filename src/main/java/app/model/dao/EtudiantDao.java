@@ -13,4 +13,5 @@ public interface EtudiantDao {
 	public boolean update(Etudiant etudiant);
 	public Integer addGetId(Etudiant etudiant);
 	public List<Etudiant> getBySession(Session session);
+	public List<Etudiant> getCandidatsBySession(Session session);
 }

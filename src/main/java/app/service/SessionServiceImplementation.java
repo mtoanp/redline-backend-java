@@ -3,6 +3,7 @@ package app.service;
 import java.sql.Connection;
 import java.util.List;
 
+import app.model.entity.*;
 import org.springframework.stereotype.Service;
 
 import app.model.dao.CoursDao;
@@ -14,10 +15,6 @@ import app.model.dao.SessionDaoImplementation;
 import app.model.dao.ThemeDao;
 import app.model.dao.ThemeDaoImplementation;
 import app.model.dbConnection.ConnectionDatabase;
-import app.model.entity.Cours;
-import app.model.entity.Etudiant;
-import app.model.entity.Formation;
-import app.model.entity.Session;
 
 @Service
 public class SessionServiceImplementation implements SessionService {
@@ -79,22 +76,35 @@ public class SessionServiceImplementation implements SessionService {
 	public Session getWithDetails(int id) {
 		Session session = sessionDao.get(id);
 		session.setEtudiants(etudiantDao.getBySession(session));
+		session.setCandidats(etudiantDao.getCandidatsBySession(session));
 		session.setCoursList(coursDao.getBySession(session));
 		return session;
 	}
-	
+
+	@Override
+	public boolean addCandidat(Session session, Etudiant etudiant) {
+        return sessionDao.addCandidat(session, etudiant);
+	}
+
+	@Override
+	public boolean removeCandidat(Session session, Etudiant etudiant) {
+        return sessionDao.removeCandidat(session, etudiant);
+	}
+
 	@Override
 	public boolean addEtudiant(Session session, Etudiant etudiant) {
-		if(sessionDao.addEtudiant(session, etudiant))
-			return true;
+		Candidature candidature = sessionDao.getCandidature(session, etudiant);
+		if(candidature != null)
+			return sessionDao.addEtudiant(candidature);
 		else
 			return false;
 	}
-	
+
 	@Override
 	public boolean removeEtudiant(Session session, Etudiant etudiant) {
-		if(sessionDao.removeEtudiant(session, etudiant))
-			return true;
+		Candidature candidature = sessionDao.getCandidature(session, etudiant);
+		if(candidature != null)
+			return sessionDao.removeEtudiant(candidature);
 		else
 			return false;
 	}
