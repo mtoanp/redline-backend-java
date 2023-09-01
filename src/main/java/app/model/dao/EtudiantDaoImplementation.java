@@ -145,7 +145,35 @@ public class EtudiantDaoImplementation implements EtudiantDao {
 			String query = "SELECT * FROM etudiant e "
 							+ " LEFT JOIN session_etudiant es"
 							+ " ON e.id = es.id_etudiant"
-							+ " WHERE es.id_session = " + session.getId();
+							+ " WHERE es.id_session = " + session.getId() 
+							+ "AND es.valide IS true";
+			
+			ResultSet resultSet = statement.executeQuery(query);
+			
+			while(resultSet.next()) {
+	            Etudiant etudiant = new Etudiant(
+	                    resultSet.getInt("id"),
+	                    resultSet.getString("nom"),
+	                    resultSet.getString("prenom")
+	            );
+	            etudiants.add(etudiant);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return etudiants;
+	}
+	
+	public List<Etudiant> getBySessionNoValide(Session session) {
+		List<Etudiant> etudiants = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+//			String query = "SELECT * FROM etudiant WHERE id_session = " + id;
+			String query = "SELECT * FROM etudiant e "
+							+ " LEFT JOIN session_etudiant es"
+							+ " ON e.id = es.id_etudiant"
+							+ " WHERE es.id_session = " + session.getId() 
+							+ "AND es.valide IS false";
 			
 			ResultSet resultSet = statement.executeQuery(query);
 			

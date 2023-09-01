@@ -12,6 +12,7 @@ public class Session {
 	private Integer idFormation;
 	private Integer nbEtudiants;
 	private List<Etudiant> etudiants = new ArrayList<>();
+	private List<Etudiant> candidats = new ArrayList<>();
 	private List<Cours> coursList = new ArrayList<>();
 	private Formation formation;
 	
@@ -103,6 +104,14 @@ public class Session {
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+	public List<Etudiant> getCandidats() {
+		return candidats;
+	}
+
+	public void setCandidats(List<Etudiant> candidats) {
+		this.candidats = candidats;
 	}
 	
 }

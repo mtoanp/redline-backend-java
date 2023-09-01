@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class ConnectionDatabase {
 	private static final String URL = "jdbc:mysql://localhost:3306/redline";
 	private static final String USER = "root";
-	private static final String PASS = "secret";
+	private static final String PASS = "root";
 
 	private static Connection connection;
 

@@ -71,10 +71,16 @@ public class EtudiantController {
 		return etudiant;
 	}
 	
-	@GetMapping("/findsession/{session}")
+	@GetMapping("/findsession/{sessionId}")
 	public List<Etudiant> getBySession(@PathVariable int id) {
 		SessionService sessionService = new SessionServiceImplementation();
 		return etudiantService.getBySession(sessionService.get(id));
+	}
+	
+	@GetMapping("/findsessionCandidat/{sessionId}")
+	public List<Etudiant> getBySessionNoValide(@PathVariable int id) {
+		SessionService sessionService = new SessionServiceImplementation();
+		return etudiantService.getBySessionNoValide(sessionService.get(id));
 	}
 	
 	

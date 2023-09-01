@@ -49,5 +49,10 @@ public class EtudiantServiceImplementation implements EtudiantService {
 	public List<Etudiant> getBySession(Session session) {
 		return etudiantDao.getBySession(session);
 	}
+
+	@Override
+	public List<Etudiant> getBySessionNoValide(Session session) {
+		return etudiantDao.getBySession(session);
+	}
 	
 }
