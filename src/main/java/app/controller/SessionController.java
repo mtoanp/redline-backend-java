@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.management.RuntimeErrorException;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("api/sessions")
 public class SessionController {

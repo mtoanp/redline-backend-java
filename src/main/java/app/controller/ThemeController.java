@@ -12,9 +12,9 @@ import app.model.validation.ThemeValidation;
 import app.service.FormationService;
 import app.service.ThemeService;
 
-@CrossOrigin(maxAge = 3600)
+//@CrossOrigin(maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-
 @RequestMapping("api/themes")
 public class ThemeController {
 	

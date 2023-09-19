@@ -5,14 +5,7 @@ import java.util.List;
 import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import app.exeption.EtudiantException;
 import app.model.entity.Etudiant;
@@ -20,6 +13,7 @@ import app.service.EtudiantService;
 import app.service.SessionService;
 import app.service.SessionServiceImplementation;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/etudiants")
 public class EtudiantController {
@@ -59,7 +53,8 @@ public class EtudiantController {
 	public List<Etudiant> getAll() {
 		return etudiantService.getAll();
 	}
-	
+
+
 	@PutMapping()
 	public Etudiant update(@RequestBody Etudiant etudiant) {
 		return etudiantService.update(etudiant) ? etudiant : null;
