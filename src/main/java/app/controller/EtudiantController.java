@@ -24,13 +24,7 @@ public class EtudiantController {
 	public EtudiantController(EtudiantService etudiantService) {
 		this.etudiantService = etudiantService;
 	}
-	
-	@PostMapping("/addEtudiants")
-	public Etudiant addEtudiant(@RequestBody Etudiant etudiant) {
-		etudiant.setId(null);
-		etudiantService.add(etudiant);
-		return etudiant;
-	}
+
 	
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable int id) {
@@ -54,6 +48,11 @@ public class EtudiantController {
 		return etudiantService.getAll();
 	}
 
+	@GetMapping("/search={keyword}")
+	public List<Etudiant> getByName(@PathVariable String keyword) {
+		return etudiantService.getByName(keyword);
+	}
+
 
 	@PutMapping()
 	public Etudiant update(@RequestBody Etudiant etudiant) {
@@ -65,7 +64,14 @@ public class EtudiantController {
 		etudiant.setId(etudiantService.addGetId(etudiant));
 		return etudiant;
 	}
-	
+
+	@PostMapping("/addEtudiants")
+	public Etudiant addEtudiant(@RequestBody Etudiant etudiant) {
+		etudiant.setId(null);
+		etudiantService.add(etudiant);
+		return etudiant;
+	}
+
 	@GetMapping("/findsession/{sessionId}")
 	public List<Etudiant> getBySession(@PathVariable int id) {
 		SessionService sessionService = new SessionServiceImplementation();

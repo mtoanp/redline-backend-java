@@ -14,4 +14,5 @@ public interface EtudiantService {
 	public Integer addGetId(Etudiant etudiant);
 	public List<Etudiant> getBySession(Session session);
 	public List<Etudiant> getCandidatsBySession(Session session);
+    List<Etudiant> getByName(String keyword);
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.model.entity.Etudiant;
+import app.model.entity.Formation;
 import app.model.entity.Session;
 
 public class EtudiantDaoImplementation implements EtudiantDao {
@@ -135,6 +136,28 @@ public class EtudiantDaoImplementation implements EtudiantDao {
 		return etudiants;
 	}
 
+	public List<Etudiant> getByName(String keyword) {
+		List<Etudiant> etudiants = new ArrayList<>();
+
+		try {
+			String query = "SELECT * FROM etudiant WHERE nom LIKE ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, "%"+keyword+"%");
+			ResultSet resultSet = statement.executeQuery();
+
+			while(resultSet.next()) {
+				Etudiant etudiant = new Etudiant(
+						resultSet.getInt("id"),
+						resultSet.getString("nom"),
+						resultSet.getString("prenom")
+				);
+				etudiants.add(etudiant);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return etudiants;
+	}
 	
 	public List<Etudiant> getBySession(Session session) {
 		List<Etudiant> etudiants = new ArrayList<>();
@@ -188,5 +211,4 @@ public class EtudiantDaoImplementation implements EtudiantDao {
 		}
 		return etudiants;
 	}
-	
 }

@@ -23,8 +23,8 @@ public class FormationController {
 	public FormationController(FormationService formationService) {
 		this.formationService = formationService;
 	}
-	
-	
+
+
 	@GetMapping()
 	public List<Formation> getAll() {
 		return formationService.getAll();
@@ -36,7 +36,13 @@ public class FormationController {
 			throw new FormationException("Formation not found: " + id);
 		return formationService.getWithDetails(id);
 	}
-	
+
+	@GetMapping("/search={keyword}")
+	public List<Formation> getByName(@PathVariable String keyword) {
+		System.out.print(keyword);
+		return formationService.getByName(keyword);
+	}
+
 	@PostMapping()
 	public Formation addGet(@RequestBody Formation formation) {
 		formation.setId(formationService.addGetId(formation));

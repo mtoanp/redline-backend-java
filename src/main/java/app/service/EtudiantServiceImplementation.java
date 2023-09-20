@@ -37,7 +37,10 @@ public class EtudiantServiceImplementation implements EtudiantService {
 	public List<Etudiant> getAll() {
 		return etudiantDao.getAll();
 	}
-	
+
+	public List<Etudiant> getByName(String keyword) {
+		return etudiantDao.getByName(keyword);
+	}
 	public boolean update(Etudiant etudiant) {
 		return etudiantDao.update(etudiant);
 	}
@@ -54,5 +57,4 @@ public class EtudiantServiceImplementation implements EtudiantService {
 	public List<Etudiant> getCandidatsBySession(Session session) {
 		return etudiantDao.getBySession(session);
 	}
-	
 }
