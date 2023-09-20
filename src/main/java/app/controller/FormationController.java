@@ -55,12 +55,13 @@ public class FormationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable int id) {
+	public void delete(@PathVariable int id) {
 		Formation formation = formationService.get(id);
 		if(formation == null) {
 			throw new RuntimeErrorException(null, "formation not found id: " + id);
 		}
-		return formationService.delete(formation) ? "deleted" : "operation failed";
+		formationService.delete(formation);
+//		return formationService.delete(formation) ? "deleted" : "operation failed";
 	}
 	
 }

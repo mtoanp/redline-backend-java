@@ -27,12 +27,13 @@ public class EtudiantController {
 
 	
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable int id) {
+	public void delete(@PathVariable int id) {
 		Etudiant etudiant = etudiantService.get(id);
 		if (etudiant == null) {
 			throw new RuntimeErrorException(null, "Etudiant not found id - " + id);
 		}
-		return etudiantService.delete(etudiant) ? "deleted" : "operation failed";
+		etudiantService.delete(etudiant);
+//		return etudiantService.delete(etudiant) ? "deleted" : "operation failed";
 	}
 	
 	@GetMapping("/{id}")
