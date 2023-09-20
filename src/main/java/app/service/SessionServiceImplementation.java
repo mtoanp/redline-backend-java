@@ -3,33 +3,34 @@ package app.service;
 import java.sql.Connection;
 import java.util.List;
 
+import app.model.dao.*;
 import app.model.entity.*;
 import org.springframework.stereotype.Service;
 
-import app.model.dao.CoursDao;
-import app.model.dao.CoursDaoImplementation;
-import app.model.dao.EtudiantDao;
-import app.model.dao.EtudiantDaoImplementation;
-import app.model.dao.SessionDao;
-import app.model.dao.SessionDaoImplementation;
-import app.model.dao.ThemeDao;
-import app.model.dao.ThemeDaoImplementation;
 import app.model.dbConnection.ConnectionDatabase;
 
 @Service
 public class SessionServiceImplementation implements SessionService {
 	Connection connection;
 	ThemeDao themeDao;
+	FormationDao formationDao;
 	SessionDao sessionDao;
 	EtudiantDao etudiantDao;
 	CoursDao coursDao;
+	MatiereDao matiereDao;
+	ProfesseurDao professeurDao;
+	SalleDao salleDao;
 	
 	public SessionServiceImplementation() {
 		connection = ConnectionDatabase.getConnection();
 		themeDao = new ThemeDaoImplementation(connection);
+		formationDao = new FormationDaoImplementation(connection);
 		sessionDao = new SessionDaoImplementation(connection);
 		etudiantDao = new EtudiantDaoImplementation(connection);
 		coursDao = new CoursDaoImplementation(connection);
+		matiereDao = new MatiereDaoImplementation(connection);
+		professeurDao = new ProfesseurDaoImplementation(connection);
+		salleDao = new SalleDaoImplementation(connection);
 	}
 
 	@Override
@@ -75,9 +76,21 @@ public class SessionServiceImplementation implements SessionService {
 	@Override
 	public Session getWithDetails(int id) {
 		Session session = sessionDao.get(id);
+		session.setFormation(formationDao.get(session.getIdFormation()));
 		session.setEtudiants(etudiantDao.getBySession(session));
 		session.setCandidats(etudiantDao.getCandidatsBySession(session));
-		session.setCoursList(coursDao.getBySession(session));
+		List<Cours> coursList = coursDao.getBySession(session);
+//		List<Cours> coursListDetails = new ArrayList<Cours>();
+		int index = 0;
+		for(Cours c : coursList) {
+			c.setSession(sessionDao.get(c.getIdSession()));
+			c.setProfesseur(professeurDao.get(c.getIdProfesseur()));
+			c.setMatiere(matiereDao.get(c.getIdMatiere()));
+			c.setSalle(salleDao.get(c.getIdSalle()));
+			coursList.set(index++, c);
+//			coursListDetails.add(c);
+		}
+		session.setCoursList(coursList);
 		return session;
 	}
 

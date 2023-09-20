@@ -54,6 +54,8 @@ public class CoursServiceImplementation implements CoursService {
 	public List<Cours> getBySession(int id) {
 		return coursDao.getBySession(id);
 	}
-	
-	
+
+//	public Cours getWithDetails(Cours cours) {
+//
+//	}
 }
