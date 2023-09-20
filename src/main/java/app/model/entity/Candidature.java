@@ -5,11 +5,16 @@ import java.sql.Connection;
 public class Candidature {
     private Integer idSession;
     private Integer idEtudiant;
-    private Boolean valide;
+    private boolean valide;
 
-    public Candidature(Integer idSession, Integer idEtudiant) {
+//    public Candidature(Integer idSession, Integer idEtudiant) {
+//        this.idSession = idSession;
+//        this.idEtudiant = idEtudiant;
+//    }
+    public Candidature(Integer idSession, Integer idEtudiant, boolean valide) {
         this.idSession = idSession;
         this.idEtudiant = idEtudiant;
+        this.valide = valide;
     }
 
     public Integer getIdSession() {
@@ -28,11 +33,11 @@ public class Candidature {
         this.idEtudiant = idEtudiant;
     }
 
-    public Boolean getValide() {
+    public boolean isValide() {
         return valide;
     }
 
-    public void setValide(Boolean valide) {
+    public void setValide(boolean valide) {
         this.valide = valide;
     }
 }

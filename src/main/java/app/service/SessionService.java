@@ -15,9 +15,10 @@ public interface SessionService {
 	Session getWithDetails(int id);
 	Session getByCours(Cours cours);
 
-	Candidature getCandidature(Session session, Etudiant etudiant);
-	boolean addCandidature(Session session, Etudiant etudiant);
-	boolean removeCandidature(Session session, Etudiant etudiant);
-	boolean acceptCandidature(Session session, Etudiant etudiant);
-	boolean denyCandidature(Session session, Etudiant etudiant);
+	Candidature getCandidature(Candidature candidature);
+	boolean addCandidature(Candidature candidature);
+	boolean removeCandidature(Candidature candidature);
+	boolean updateCandidature(Candidature candidature);
+
+	List<Candidature> getCandidaturesBySession(int idSession);
 }

@@ -93,35 +93,32 @@ public class SessionServiceImplementation implements SessionService {
 	}
 
 	@Override
-	public Candidature getCandidature(Session session, Etudiant etudiant) {
-		return sessionDao.getCandidature(session, etudiant);
+	public Candidature getCandidature(Candidature candidature) {
+		return sessionDao.getCandidature(candidature);
 	}
 	@Override
-	public boolean addCandidature(Session session, Etudiant etudiant) {
-        return sessionDao.addCandidature(session, etudiant);
-	}
-
-	@Override
-	public boolean removeCandidature(Session session, Etudiant etudiant) {
-        return sessionDao.removeCandidature(session, etudiant);
+	public boolean addCandidature(Candidature candidature) {
+        return sessionDao.addCandidature(candidature);
 	}
 
 	@Override
-	public boolean acceptCandidature(Session session, Etudiant etudiant) {
-		Candidature candidature = sessionDao.getCandidature(session, etudiant);
-		if(candidature != null)
-			return sessionDao.acceptCandidature(candidature);
+	public boolean removeCandidature(Candidature candidature) {
+        return sessionDao.removeCandidature(candidature);
+	}
+
+	@Override
+	public boolean updateCandidature(Candidature candidature) {
+//		System.out.println(candidature.getIdSession() + "  " +candidature.getIdEtudiant()+ "  " +candidature.isValide());
+		Candidature candidatureCheck = sessionDao.getCandidature(candidature);
+		if(candidatureCheck != null)
+			return sessionDao.updateCandidature(candidature);
 		else
 			return false;
 	}
 
 	@Override
-	public boolean denyCandidature(Session session, Etudiant etudiant) {
-		Candidature candidature = sessionDao.getCandidature(session, etudiant);
-		if(candidature != null)
-			return sessionDao.denyCandidature(candidature);
-		else
-			return false;
+	public List<Candidature> getCandidaturesBySession(int idSession) {
+		return sessionDao.getCandidaturesBySession(idSession);
 	}
-	
+
 }
