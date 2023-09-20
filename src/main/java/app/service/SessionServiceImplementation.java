@@ -93,6 +93,10 @@ public class SessionServiceImplementation implements SessionService {
 	}
 
 	@Override
+	public Candidature getCandidature(Session session, Etudiant etudiant) {
+		return sessionDao.getCandidature(session, etudiant);
+	}
+	@Override
 	public boolean addCandidature(Session session, Etudiant etudiant) {
         return sessionDao.addCandidature(session, etudiant);
 	}

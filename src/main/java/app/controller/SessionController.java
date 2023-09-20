@@ -53,24 +53,24 @@ public class SessionController {
 	}
 	
 	
-	//	sessions/addCandidature?session=1&etudiant=4
-	@PostMapping("/addCandidature")
-	public String addCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
-		return sessionService.addCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session add etudiant success" : "failed";
-	}
-
-	@DeleteMapping("/removeCandidature")
-	public String removeCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
-		return sessionService.removeCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session remove etudiant success" : "failed";
-	}
-
-	@PostMapping("/admin/acceptCandidature")
-	public String acceptCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
-		return sessionService.acceptCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session add etudiant success" : "failed";
-	}
-
-	@DeleteMapping("/admin/denyCandidature")
-	public String denyCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
-		return sessionService.denyCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session remove etudiant success" : "failed";
-	}
+//	//	sessions/addCandidature?session=1&etudiant=4
+//	@PostMapping("/addCandidature")
+//	public String addCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
+//		return sessionService.addCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session add etudiant success" : "failed";
+//	}
+//
+//	@DeleteMapping("/removeCandidature")
+//	public String removeCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
+//		return sessionService.removeCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session remove etudiant success" : "failed";
+//	}
+//
+//	@PostMapping("/admin/acceptCandidature")
+//	public String acceptCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
+//		return sessionService.acceptCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session add etudiant success" : "failed";
+//	}
+//
+//	@DeleteMapping("/admin/denyCandidature")
+//	public String denyCandidature(@RequestParam(name = "session") int idSession, @RequestParam(name = "etudiant") int idEtudiant) {
+//		return sessionService.denyCandidature(sessionService.get(idSession), etudiantService.get(idEtudiant)) ? "Session remove etudiant success" : "failed";
+//	}
 }
