@@ -80,15 +80,13 @@ public class SessionServiceImplementation implements SessionService {
 		session.setEtudiants(etudiantDao.getBySession(session));
 		session.setCandidats(etudiantDao.getCandidatsBySession(session));
 		List<Cours> coursList = coursDao.getBySession(session);
-//		List<Cours> coursListDetails = new ArrayList<Cours>();
 		int index = 0;
 		for(Cours c : coursList) {
 			c.setSession(sessionDao.get(c.getIdSession()));
-			c.setProfesseur(professeurDao.get(c.getIdProfesseur()));
-			c.setMatiere(matiereDao.get(c.getIdMatiere()));
-			c.setSalle(salleDao.get(c.getIdSalle()));
+			if (c.getIdProfesseur() != null)	c.setProfesseur(professeurDao.get(c.getIdProfesseur()));
+			if (c.getIdMatiere() != null)		c.setMatiere(matiereDao.get(c.getIdMatiere()));
+			if (c.getIdSalle() != null)			c.setSalle(salleDao.get(c.getIdSalle()));
 			coursList.set(index++, c);
-//			coursListDetails.add(c);
 		}
 		session.setCoursList(coursList);
 		return session;

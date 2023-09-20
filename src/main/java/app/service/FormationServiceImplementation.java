@@ -80,7 +80,7 @@ public class FormationServiceImplementation implements FormationService {
 	public Formation getWithDetails(int id) {
 		Formation formation = formationDao.get(id);
 		List<Session> sessions = sessionDao.getByFormation(formation);
-		formation.setThemes(themeDao.getByFormation(formation));
+//		formation.setThemes(themeDao.getByFormation(formation));
 		formation.setSessions(sessions);
 		return formation;
 	}
